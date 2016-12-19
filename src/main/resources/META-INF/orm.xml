@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity-mappings
+		xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+		 http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/persistence/orm_2_1.xsd" version="2.1">
+
+	<entity class="fr.formation.entity.Ingredient">
+		<table name="Ingredient"/>
+		<attributes>
+			<id name="id">
+				<generated-value strategy="IDENTITY"/>
+			</id>
+			<basic name="name">
+				<column name="name"/>
+			</basic>
+			<basic name="state">
+				<column name="state"/>
+			</basic>
+		</attributes>
+	</entity>
+	<entity class="fr.formation.entity.Cocktail">
+		<table name="Cocktail"/>
+		<attributes>
+			<id name="id">
+				<generated-value strategy="IDENTITY"/>
+			</id>
+			<basic name="name">
+				<column name="name"/>
+			</basic>
+			<basic name="prix">
+				<column name="prix"/>
+			</basic>
+			<basic name="withAlcohol">
+				<column name="withAlcohol"/>
+			</basic>
+		</attributes>
+	</entity>
+</entity-mappings>
