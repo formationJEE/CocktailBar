@@ -15,7 +15,7 @@ import java.util.List;
 public class CocktailService {
 
     @Autowired
-    private CocktailDao dao;
+    private CocktailDao cocktailDao;
 
     @Autowired
     private IngredientDao ingredientDao;
@@ -24,22 +24,22 @@ public class CocktailService {
     private IngredientCocktailDao ingredientCocktailDao;
 
     public List<Cocktail> getAll(){
-        return this.dao.findAll();
+        return this.cocktailDao.findAll();
     }
 
     @Transactional
     public void create(Cocktail cocktail){
-        this.dao.save(cocktail);
+        this.cocktailDao.save(cocktail);
     }
 
     @Transactional
     public void update(Cocktail cocktail){
-        this.dao.save(cocktail);
+        this.cocktailDao.save(cocktail);
     }
 
     @Transactional
     public void del(int id){
-        this.dao.delete(id);
+        this.cocktailDao.delete(id);
     }
 
     public List<IngredientCocktail> findall(){
@@ -50,10 +50,14 @@ public class CocktailService {
     public void addIngredientToCocktail(Integer cocktailId, Integer ingredientId, Integer quantity){
 
         IngredientCocktail ingredientCocktail = new IngredientCocktail();
-        ingredientCocktail.setCocktail(this.dao.findOne(cocktailId));
+        ingredientCocktail.setCocktail(this.cocktailDao.findOne(cocktailId));
         ingredientCocktail.setIngredient(this.ingredientDao.findOne(ingredientId));
         ingredientCocktail.setQuantity(quantity);
 
         this.ingredientCocktailDao.save(ingredientCocktail);
+    }
+
+    public Cocktail get(Integer id){
+        return this.cocktailDao.findOne(id);
     }
 }

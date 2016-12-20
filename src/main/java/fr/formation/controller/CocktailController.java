@@ -45,7 +45,7 @@ public class CocktailController {
         Integer id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         Double prix = Double.parseDouble(request.getParameter("prix"));
-        Integer withAlcohol = Integer.parseInt(request.getParameter("withAlcohol"));
+        boolean withAlcohol = Boolean.getBoolean(request.getParameter("withAlcohol"));
 
         Cocktail cocktail = new Cocktail(id, name, prix, withAlcohol);
 
@@ -70,7 +70,7 @@ public class CocktailController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String newCocktail(@RequestParam String name,
                               @RequestParam double prix,
-                              @RequestParam int withAlcohol){
+                              @RequestParam boolean withAlcohol){
 
         service.create(new Cocktail(name, prix, withAlcohol));
         return "redirect:/cocktails.html";
@@ -80,7 +80,7 @@ public class CocktailController {
     public String editIngredient(@RequestParam Integer id,
                                  @RequestParam String name,
                                  @RequestParam Double prix,
-                                 @RequestParam Integer withAlcohol){
+                                 @RequestParam boolean withAlcohol){
 
         service.update(new Cocktail(id, name, prix, withAlcohol));
 

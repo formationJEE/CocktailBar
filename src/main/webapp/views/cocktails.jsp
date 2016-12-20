@@ -23,7 +23,8 @@
                 </thead>
                 <tbody>
                     <c:forEach var="cocktail" items="${cocktails}">
-                        <tr class='clickable-row' data-href="/cocktails/edit.html?id=${cocktail.id}&name=${cocktail.name}&prix=${cocktail.prix}&withAlcohol=${cocktail.withAlcohol}">
+                        <%--<tr class='clickable-row' data-href="/cocktails/edit.html?id=${cocktail.id}&name=${cocktail.name}&prix=${cocktail.prix}&withAlcohol=${cocktail.withAlcohol}">--%>
+                        <tr class='clickable-row' data-href="/cocktail/edit/${cocktail.id}.html">
                             <td hidden>${cocktail.id}</td>
                             <td>
                                 ${cocktail.name}
@@ -33,7 +34,7 @@
                             </td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${cocktail.withAlcohol == 1}">
+                                    <c:when test="${true.equals(cocktail.withAlcohol)}">
                                         Oui
                                     </c:when>
                                     <c:otherwise>

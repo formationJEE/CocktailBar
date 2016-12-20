@@ -1,23 +1,36 @@
 package fr.formation.entity;
 
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 public class Cocktail {
+
     private int id;
+
+    @NotNull
+    @Pattern(regexp = "[^/:!;.,?+-=@]+")
     private String name;
+
+    @NotNull
+    @Min(0)
     private double prix;
-    private int withAlcohol;
+
+    private boolean withAlcohol;
 
     public Cocktail() {
 
     }
 
-    public Cocktail(int id, String name, double prix, int withAlcohol) {
+    public Cocktail(int id, String name, double prix, boolean withAlcohol) {
         this.id = id;
         this.name = name;
         this.prix = prix;
         this.withAlcohol = withAlcohol;
     }
 
-    public Cocktail(String name, double prix, int withAlcohol) {
+    public Cocktail(String name, double prix, boolean withAlcohol) {
         this.name = name;
         this.prix = prix;
         this.withAlcohol = withAlcohol;
@@ -47,11 +60,11 @@ public class Cocktail {
         this.prix = prix;
     }
 
-    public int getWithAlcohol() {
+    public boolean isWithAlcohol() {
         return withAlcohol;
     }
 
-    public void setWithAlcohol(int withAlcohol) {
+    public void setWithAlcohol(boolean withAlcohol) {
         this.withAlcohol = withAlcohol;
     }
 }
