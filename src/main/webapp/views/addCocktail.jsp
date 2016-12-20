@@ -68,13 +68,58 @@
                     </c:when>
                     <c:otherwise>
                         <button type="submit" class="btn btn-info">Modifier</button>
-                        <a type="button" class="btn btn-danger" href="cocktails/del.html?id=${cocktail.id}">Supprimer</a>
+                        <a type="boutton" class="btn btn-default" data-toggle="modal" data-target="#myModal" data-backdrop="static">
+                            Ajout Ingredient
+                        </a>
+                        <a type="button" class="btn btn-danger" href="cocktails/del/${cocktail.id}.html">Supprimer</a>
                     </c:otherwise>
                 </c:choose>
 
             </div>
         </div>
     </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ajout Ingredient</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="post" action="addIngredientToCocktail.html">
+
+                    <input type="hidden" name="cocktailId" value="${cocktail.id}">
+
+                    <div class="form-group">
+                        <label for="ingredient" class="col-sm-2 control-label">Ingredient</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" name="ingredientId" id="ingredient">
+                                <c:forEach var="ingredientCocktail" items="${ingredientCocktailList}">
+                                    <option value="${ingredientCocktail.ingredient.id}">${ingredientCocktail.ingredient.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity" class="col-sm-2 control-label">Quantite</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" name="quantity" id="quantity" type="number" min="0" max="100" placeholder="in %">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
 
 <jsp:include page="layout/footer.jsp"/>

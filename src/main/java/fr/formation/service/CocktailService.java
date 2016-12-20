@@ -1,7 +1,10 @@
 package fr.formation.service;
 
 import fr.formation.dao.CocktailDao;
+import fr.formation.dao.IngredientCocktailDao;
+import fr.formation.dao.IngredientDao;
 import fr.formation.entity.Cocktail;
+import fr.formation.entity.IngredientCocktail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,12 @@ public class CocktailService {
 
     @Autowired
     private CocktailDao dao;
+
+    @Autowired
+    private IngredientDao ingredientDao;
+
+    @Autowired
+    private IngredientCocktailDao ingredientCocktailDao;
 
     public List<Cocktail> getAll(){
         return this.dao.findAll();
@@ -31,5 +40,20 @@ public class CocktailService {
     @Transactional
     public void del(int id){
         this.dao.delete(id);
+    }
+
+    public List<IngredientCocktail> findall(){
+        return this.ingredientCocktailDao.findAll();
+    }
+
+    @Transactional
+    public void addIngredientToCocktail(Integer cocktailId, Integer ingredientId, Integer quantity){
+
+        IngredientCocktail ingredientCocktail = new IngredientCocktail();
+        ingredientCocktail.setCocktail(this.dao.findOne(cocktailId));
+        ingredientCocktail.setIngredient(this.ingredientDao.findOne(ingredientId));
+        ingredientCocktail.setQuantity(quantity);
+
+        this.ingredientCocktailDao.save(ingredientCocktail);
     }
 }
